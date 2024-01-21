@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Masai Games</title>
+</head>
+
+<body>
+    <div id="min"></div>
+    <div id="max"></div>
+    <div id="score"> </div>
+    <div id="keypad">
+        <button>0</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+    </div>
+    <button id="enter">ENTER</button>
+</body>
+<script>
+    const btn = document.querySelector("#enter");
+    const score = document.querySelector("#score");
+    const minDiv = document.querySelector("#min");
+    const maxDiv = document.querySelector("#max");
+
+    let current = 0;
+    let minValue = 0;
+    let maxValue = 0;
+
+    document.querySelectorAll("#keypad button").forEach(item => {
+        item.addEventListener('click', function() {
+            current = parseInt(item.textContent);
+            score.textContent = current;
+
+            if (minValue === 0 && maxValue === 0) {
+                minValue = current;
+                maxValue = current;
+                minDiv.textContent = `Min: ${minValue}`;
+                maxDiv.textContent = `Max: ${maxValue}`;
+            }
+
+
+            if (current < minValue) {
+                minValue = current;
+                minDiv.textContent = `Min: ${minValue}`;
+            }
+
+            if (current > maxValue) {
+                maxValue = current;
+                maxDiv.textContent = `Max: ${maxValue}`;
+            }
+        });
+    });
+    btn.addEventListener('click', function() {
+        current = 0;
+        score.textContent = "";
+    });
+</script>
+
+</html>
